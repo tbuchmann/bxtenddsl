@@ -1,0 +1,36 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: de.ubt.ai1.m2m.bxtenddsl
+Bundle-ManifestVersion: 2
+Bundle-Name: de.ubt.ai1.m2m.bxtenddsl
+Bundle-Version: 1.0.0
+Bundle-SymbolicName: de.ubt.ai1.m2m.bxtenddsl; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.common,
+ org.eclipse.xtend.lib;bundle-version="2.14.0",
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.eclipse.emf.ecore,
+ org.eclipse.core.resources;bundle-version="3.13.100",
+ org.eclipse.core.runtime;bundle-version="3.15.0",
+ org.eclipse.emf.codegen.ecore,
+ org.eclipse.jdt.core;bundle-version="3.16.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: de.ubt.ai1.m2m.bxtenddsl,
+ de.ubt.ai1.m2m.bxtenddsl.bXtendDSL,
+ de.ubt.ai1.m2m.bxtenddsl.bXtendDSL.impl,
+ de.ubt.ai1.m2m.bxtenddsl.bXtendDSL.util,
+ de.ubt.ai1.m2m.bxtenddsl.generator,
+ de.ubt.ai1.m2m.bxtenddsl.parser.antlr,
+ de.ubt.ai1.m2m.bxtenddsl.parser.antlr.internal,
+ de.ubt.ai1.m2m.bxtenddsl.scoping,
+ de.ubt.ai1.m2m.bxtenddsl.serializer,
+ de.ubt.ai1.m2m.bxtenddsl.services,
+ de.ubt.ai1.m2m.bxtenddsl.utils,
+ de.ubt.ai1.m2m.bxtenddsl.validation,
+ de.ubt.ai1.m2m.bxtenddsl.parser.antlr.lexer
+Import-Package: org.apache.log4j
+Bundle-Vendor: Matthias Bank

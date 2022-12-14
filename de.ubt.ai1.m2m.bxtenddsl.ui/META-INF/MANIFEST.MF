@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: de.ubt.ai1.m2m.bxtenddsl.ui
+Bundle-ManifestVersion: 2
+Bundle-Name: de.ubt.ai1.m2m.bxtenddsl.ui
+Bundle-Version: 1.0.0
+Bundle-SymbolicName: de.ubt.ai1.m2m.bxtenddsl.ui; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: de.ubt.ai1.m2m.bxtenddsl,
+ de.ubt.ai1.m2m.bxtenddsl.ide,
+ org.eclipse.xtext.ui,
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.ui.editors;bundle-version="3.5.0",
+ org.eclipse.ui.ide;bundle-version="3.5.0",
+ org.eclipse.ui,
+ org.eclipse.compare,
+ org.eclipse.xtext.builder,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtend.lib;bundle-version="2.14.0";resolution:=optional,
+ org.eclipse.core.filesystem;bundle-version="1.7.200",
+ org.eclipse.emf.ecore.editor;bundle-version="2.16.0",
+ org.eclipse.emf.codegen.ecore;bundle-version="2.16.0"
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: de.ubt.ai1.m2m.bxtenddsl.ui.quickfix,
+ de.ubt.ai1.m2m.bxtenddsl.ui.contentassist,
+ de.ubt.ai1.m2m.bxtenddsl.ui.internal
+Bundle-Activator: de.ubt.ai1.m2m.bxtenddsl.ui.internal.BxtenddslActivator
+Bundle-Vendor: Matthias Bank

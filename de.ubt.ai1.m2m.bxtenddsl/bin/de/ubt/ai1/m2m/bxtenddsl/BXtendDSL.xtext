@@ -1,0 +1,97 @@
+/**
+ * BxD - When one is about to orgasm and yells CHEA!
+ * https://www.urbandictionary.com/define.php?term=bXd
+ */
+grammar de.ubt.ai1.m2m.bxtenddsl.BXtendDSL hidden(WS, INDENTATION, SL_COMMENT)
+
+generate bXtendDSL "http://www.ubt.de/ai1/m2m/bxtenddsl/BXtendDSL"
+
+import "http://www.eclipse.org/emf/2002/Ecore"
+
+BXtendDSL:
+	metamodels=Metamodels
+	config=Config
+	(rules+=TransformationRule)*;
+	
+Metamodels:
+	'sourcemodel' sourcemodel=STRING
+	'targetmodel' targetmodel=STRING;
+	
+Config:
+	{Config}
+	('options'
+	TAB_INDENTED_BLOCK_BEGIN
+		(options+=ID)+
+	TAB_INDENTED_BLOCK_END)?;
+	
+TransformationRule:
+	'rule' name=ID
+	TAB_INDENTED_BLOCK_BEGIN
+		'src' (srcMatcher+=SrcClassMatcher)
+		(TAB_INDENTED_BLOCK_BEGIN
+			(srcMatcher+=SrcClassMatcher)+
+		TAB_INDENTED_BLOCK_END)?
+		
+		'trg' (trgMatcher+=TrgClassMatcher)
+		(TAB_INDENTED_BLOCK_BEGIN
+			(trgMatcher+=TrgClassMatcher)+
+		TAB_INDENTED_BLOCK_END)?
+		
+		(mappings+=FeatureMapping)*
+	TAB_INDENTED_BLOCK_END;
+	
+ClassMatcher:
+	SrcClassMatcher | TrgClassMatcher;
+SrcClassMatcher:
+	clazz=[EClass|ID] name=ID modifier=ClassMatcherModifier';';
+TrgClassMatcher:
+	clazz=[EClass|ID] name=ID modifier=ClassMatcherModifier';';
+	
+ClassMatcherModifier:
+	{ClassMatcherModifier}
+	('|' ((filter?='filter'',')? & (sort?='sort'',')? & (creation?='creation'',')? & (deletion?='deletion'',')?)
+			group?='group'
+	| '|' ((group?='group'',')? & (sort?='sort'',')? & (creation?='creation'',')? & (deletion?='deletion'',')?)
+			filter?='filter'
+	| '|' ((group?='group'',')? & (filter?='filter'',')? & (creation?='creation'',')? & (deletion?='deletion'',')?)
+			sort?='sort'
+	| '|' ((group?='group'',')? & (filter?='filter'',')? & (sort?='sort'',')? & (deletion?='deletion'',')?)
+			creation?='creation'
+	| '|' ((group?='group'',')? & (filter?='filter'',')? & (sort?='sort'',')? & (creation?='creation'',')?)
+			deletion?='deletion')?;
+	
+FeatureMapping:
+	(srcFeatures+=SrcMappingFeature | srcClasses+=[ClassMatcher|ID])+
+	direction=Direction
+	(trgFeatures+=TrgMappingFeature | trgClasses+=[ClassMatcher|ID])+';';
+	
+MappingFeature:
+	SrcMappingFeature | TrgMappingFeature;
+SrcMappingFeature:
+	feature=[EStructuralFeature|FeatureAccess]
+	| corr?='{'feature=[EStructuralFeature|FeatureAccess] ':' corrs+=Correspondence(',' corrs+=Correspondence)*'}';
+TrgMappingFeature:
+	feature=[EStructuralFeature|FeatureAccess]
+	| corr?='{'feature=[EStructuralFeature|FeatureAccess] ':' corrs+=Correspondence(',' corrs+=Correspondence)*'}';
+	
+Correspondence:
+	rule=[TransformationRule|ID]('['matchers+=[ClassMatcher|ID](',' matchers+=[ClassMatcher|ID])*']')?;
+	
+enum Direction:
+	FWD = '-->' | BWD = '<--' | BX = '<-->';
+
+FeatureAccess:
+	ID (=>'.' ID)+;
+
+terminal ID:
+	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+terminal STRING:
+	'"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"'
+	| "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'";
+
+terminal WS: ' '+;
+terminal INDENTATION: ('\r\n'|'\n'|'\r') '\t'*;
+terminal SL_COMMENT: ('//' !('\n'|'\r')*) | (('\r\n'|'\n'|'\r') '\t'* '//' !('\n'|'\r')*);
+
+terminal TAB_INDENTED_BLOCK_BEGIN: 'synthetic:TAB_INDENTED_BLOCK_BEGIN';
+terminal TAB_INDENTED_BLOCK_END: 'synthetic:TAB_INDENTED_BLOCK_END';

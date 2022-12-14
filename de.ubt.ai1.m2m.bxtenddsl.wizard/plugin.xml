@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="de.ubt.ai1.m2m.bxtenddsl.wizard.bxtend"
+            name="BXtend">
+      </category>
+      <wizard
+            canFinishEarly="false"
+            category="de.ubt.ai1.m2m.bxtenddsl.wizard.bxtend"
+            class="de.ubt.ai1.m2m.bxtenddsl.wizard.BXtendDSLWizard"
+            finalPerspective="org.eclipse.jdt.ui.JavaPerspective"
+            hasPages="true"
+            id="de.ubt.ai1.m2m.bxtenddsl.wizard.bxtenddsl"
+            name="BXtendDSL Project"
+            project="true">
+         <description>
+            Create a BXtendDSL project
+         </description>
+      </wizard>
+   </extension>
+
+</plugin>

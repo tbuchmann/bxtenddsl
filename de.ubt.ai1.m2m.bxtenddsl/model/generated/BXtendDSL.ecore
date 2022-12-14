@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bXtendDSL" nsURI="http://www.ubt.de/ai1/m2m/bxtenddsl/BXtendDSL"
+    nsPrefix="bXtendDSL">
+  <eClassifiers xsi:type="ecore:EClass" name="BXtendDSL">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metamodels" eType="#//Metamodels"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="config" eType="#//Config"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
+        eType="#//TransformationRule" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Metamodels">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourcemodel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="customizedSrcElements"
+        upperBound="-1" eType="#//CustomizedElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetmodel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="customizedTrgElements"
+        upperBound="-1" eType="#//CustomizedElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomizedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="customId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomizedGetter" eSuperTypes="#//CustomizedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomizedSetter" eSuperTypes="#//CustomizedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Config">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="options" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransformationRule">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="srcMatcher" upperBound="-1"
+        eType="#//SrcClassMatcher" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trgMatcher" upperBound="-1"
+        eType="#//TrgClassMatcher" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappings" upperBound="-1"
+        eType="#//FeatureMapping" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassMatcher">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clazz" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modifier" eType="#//ClassMatcherModifier"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SrcClassMatcher" eSuperTypes="#//ClassMatcher"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TrgClassMatcher" eSuperTypes="#//ClassMatcher"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassMatcherModifier">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sort" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="creation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deletion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="group" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureMapping">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="srcFeatures" upperBound="-1"
+        eType="#//SrcMappingFeature" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="srcClasses" unique="false"
+        upperBound="-1" eType="#//ClassMatcher"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//Direction"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trgFeatures" upperBound="-1"
+        eType="#//TrgMappingFeature" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trgClasses" unique="false"
+        upperBound="-1" eType="#//ClassMatcher"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingFeature">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="corr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="corrs" upperBound="-1"
+        eType="#//Correspondence" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SrcMappingFeature" eSuperTypes="#//MappingFeature"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TrgMappingFeature" eSuperTypes="#//MappingFeature"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Correspondence">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rule" eType="#//TransformationRule"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="matchers" unique="false"
+        upperBound="-1" eType="#//ClassMatcher"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Direction">
+    <eLiterals name="FWD" literal="-->"/>
+    <eLiterals name="BWD" value="1" literal="&lt;--"/>
+    <eLiterals name="BX" value="2" literal="&lt;-->"/>
+  </eClassifiers>
+</ecore:EPackage>
